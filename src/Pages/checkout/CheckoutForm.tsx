@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+
 import { CreditCardIcon } from "lucide-react";
+
+
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -72,6 +75,7 @@ const CheckoutForm = () => {
       try {
         const { data } = await axios.post(
           "http://localhost:3000/api/order/create-payment-intent",
+
           { price: total }
         );
         setClientSecret(data.clientSecret);
@@ -166,6 +170,7 @@ const CheckoutForm = () => {
 
 
         // Post the payment data and order details to the backend
+
         await axios.post("http://localhost:3000/api/order/new-collection", {
           ...paymentData,
         })
@@ -175,6 +180,7 @@ const CheckoutForm = () => {
            axios
             .post(
               "http://localhost:3000/api/order/create-checkout",
+
               {...paymentData, orderId: res.data.orderId},
               { withCredentials: true }
             )
@@ -191,9 +197,12 @@ const CheckoutForm = () => {
         })
 
 
-        // setSuccessMessage(
-        //   `Payment succeeded. Transaction ID: ${paymentIntent.id}`
-        // );
+
+       setSuccessMessage(
+           
+           `Payment succeeded. Transaction ID: ${paymentIntent.id} ${loading} ${transactionId}`
+        );
+
         localStorage.removeItem("cart");
       }
     } catch (error) {
@@ -392,3 +401,4 @@ const Checkout = () => (
 );
 
 export default Checkout;
+
