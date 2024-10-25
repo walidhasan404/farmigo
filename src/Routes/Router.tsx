@@ -11,6 +11,10 @@ import Weather from "../Pages/Weather/Weather";
 import Dashboard from "../Dashboard/index";
 import ProfileUpdate from "../Dashboard/common/Profile/Profile";
 import CheckoutForm from "../Pages/checkout/CheckoutForm";
+
+import Success from "../Pages/checkout/Success";
+import Cancel from "../Pages/checkout/Cancel";
+
 import Dashboards from "../Dashboard/layouts/Dashboard";
 import ProductsList from "../Dashboard/components/Farmer/ProductsList";
 import AddProducts from "../Dashboard/components/Farmer/AddProducts";
@@ -18,6 +22,7 @@ import OrderList from "../Dashboard/components/Farmer/OrderList";
 import AllProducts from "../Dashboard/components/Admin/AllProducts";
 import AllUsers from "../Dashboard/components/Admin/AllUsers";
 import BlogsPage from "../Dashboard/components/Admin/BlogPage";
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -43,6 +48,14 @@ export const router = createBrowserRouter([
             {
                 path: "/checkout",
                 element: <CheckoutForm />
+            },
+            {
+                path: "/order/success",
+                element: <Success/>
+            },
+            {
+                path: "/order/cancel",
+                element: <Cancel/>
             },
             /* {
                 path: "/products/grain & cereal",

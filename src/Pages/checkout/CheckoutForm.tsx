@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+
+import { CreditCardIcon } from "lucide-react";
+
+
 import axios from "axios";
 import { loadStripe } from "@stripe/stripe-js";
 import {
@@ -70,7 +74,8 @@ const CheckoutForm = () => {
     const createPaymentIntent = async () => {
       try {
         const { data } = await axios.post(
-          "https://farmigo-backend.onrender.com/api/order/create-payment-intent",
+          "http://localhost:3000/api/order/create-payment-intent",
+
           { price: total }
         );
         setClientSecret(data.clientSecret);
@@ -165,7 +170,8 @@ const CheckoutForm = () => {
 
 
         // Post the payment data and order details to the backend
-        await axios.post("https://farmigo-backend.onrender.com/api/order/new-collection", {
+
+        await axios.post("http://localhost:3000/api/order/new-collection", {
           ...paymentData,
         })
         .then((res) => {
@@ -173,7 +179,8 @@ const CheckoutForm = () => {
 
            axios
             .post(
-              "https://farmigo-backend.onrender.com/api/order/create-checkout",
+              "http://localhost:3000/api/order/create-checkout",
+
               {...paymentData, orderId: res.data.orderId},
               { withCredentials: true }
             )
@@ -190,10 +197,12 @@ const CheckoutForm = () => {
         })
 
 
+
        setSuccessMessage(
            
            `Payment succeeded. Transaction ID: ${paymentIntent.id} ${loading} ${transactionId}`
         );
+
         localStorage.removeItem("cart");
       }
     } catch (error) {
@@ -392,3 +401,4 @@ const Checkout = () => (
 );
 
 export default Checkout;
+
